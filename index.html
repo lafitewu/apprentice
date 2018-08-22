@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<title>徒弟页面</title>
 </head>
 <style>
@@ -22,16 +23,127 @@ html,body {
 		.main img {
 			width: 100%;
 		}
+
+	/*红包未开状态*/
 	.new_root {
 		position: absolute;
-		top: 78vw;
+		top: 76vw;
 		width: 100%;
+	}
+	.main .red_open {
+		position: inherit;
+		width: 25%;
+		top: -17vw;
+		left: 37.5%;
+	}
+	.main p {
+		position: inherit;
+		top: -15vw;
+		color: #FFC495;
+		font-size: 4.2vw;
+		letter-spacing: .4vw;
+		text-align: center;
+	}
+	.new_root,.red_open,.new_font {
+		display: none;
+	}
+
+
+	/*获得金币*/
+	.money_bg {
+		position: absolute;
+		top: 47vw;
+		width: 100%;
+	}
+	.money_btn {
+		display: inline-block;
+		position: inherit;
+		left: 15%;
+		top: 5vw;
+		width: 70%;
+		height: 14vw;
+		border: 1px solid #FFE000;
+		border-radius: 5px;
+		color: #FFE000;
+		text-align: center;
+		line-height: 14vw;
+		font-size: 4vw;
+		letter-spacing: .4vw;
+		text-decoration: none;
+	}
+	.money_font1,.money_font2,.money_font3,.money_font4 {
+		position: inherit;
+		top: -65vw;
+		font-size: 3.7vw;
+		color: #FF3414;
+		letter-spacing: .4vw;
+		text-align: center;
+	}
+	.gold {
+		position: inherit;
+		top: -58vw;
+		font-size: 10vw;
+		color: #FF2400;
+		text-align: center;
+	}
+	.money_bg1,.money_font1,.gold,.money_btn1 {
+		display: none;
+	}
+
+	/*红包抢光*/
+	.money_font2 {
+		font-size: 4vw;
+	}
+	.main .font_pic {
+		position: inherit;
+		top: -60vw;
+		left: 25%;
+		width: 50%;
+	}
+	.money_btn2 {
+		top: -7vw;
+	}
+	.money_bg2,.money_font2,.font_pic,.money_btn2 {
+		display: none;
+	}
+
+
+	/*已领取过*/
+	.money_font3 {
+		top: -62vw;
+		font-size: 5vw;
+	}
+	.money_font4 {
+		color: #FF7D67;
+		top: -60vw;
 	}
 </style>
 <body>
 	<div class="main">
 		<img src="images/activity_deflult_bg.png" alt="activity_deflult_bg">
+
+		<!-- 红包未开状态 -->
 		<img class="new_root" src="images/activity_redbag_image.png" alt="activity_redbag_image">
+		<img class="red_open" src="images/activity_open_botton.png" alt="activity_open_botton">
+		<p class="new_font">来自悦头条的红包</p>
+		
+		<!-- 获得金币状态 -->
+		<img class="money_bg money_bg1" src="images/activity_redbag_open_image.png" alt="activity_redbag_open_image">
+		<div class="money_font1">恭喜你获得</div>
+		<div class="gold"><span>200</span>金币</div>
+		<a class="money_btn money_btn1" href="function://callapp?f=gotoActivity&os=android&activity=com.expflow.reading.activity.MainActivity&index=2&os1=ios&activity1=XXX&index1=XXX">阅读新闻获取更多金币</a>
+
+		<!-- 红包抢光 -->
+		<img class="money_bg money_bg2" src="images/activity_redbag_open_image.png" alt="activity_redbag_open_image">
+		<div class="money_font2">红包已抢光，请继续加油赚金币哟</div>
+		<img class="font_pic" src="images/activity_news_image.png" alt="activity_news_image">
+		<a class="money_btn money_btn2" href="function://callapp?f=gotoActivity&os=android&activity=com.expflow.reading.activity.MainActivity&index=2&os1=ios&activity1=XXX&index1=XXX">阅读新闻获取更多金币</a>
+
+		<!-- 已领取过 -->
+		<img class="money_bg money_bg3" src="images/activity_redbag_open_image.png" alt="activity_redbag_open_image">
+		<div class="money_font3">您已领取过红包</div>
+		<div class="money_font4">（在收入明细可以看到领取记录）</div>
+		<a class="money_btn money_btn3" href="function://callapp?f=gotoActivity&os=android&activity=com.expflow.reading.activity.MainActivity&index=2&os1=ios&activity1=XXX&index1=XXX">阅读新闻获取更多金币</a>
 	</div>
 </body>
 </html>
