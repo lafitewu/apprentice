@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<title>徒弟页面</title>
+	<script src="js/jquery-3.1.1.min.js"></script>
 </head>
 <style>
 * {
@@ -31,6 +32,7 @@ html,body {
 		width: 100%;
 	}
 	.main .red_open {
+		z-index: 99;
 		position: inherit;
 		width: 25%;
 		top: -17vw;
@@ -56,7 +58,7 @@ html,body {
 		width: 100%;
 	}
 	.money_btn {
-		display: inline-block;
+		display: block;
 		position: inherit;
 		left: 15%;
 		top: 5vw;
@@ -117,6 +119,9 @@ html,body {
 		color: #FF7D67;
 		top: -60vw;
 	}
+	.money_bg3,.money_font3,.money_font4,.money_btn3 {
+		display: none;
+	}
 </style>
 <body>
 	<div class="main">
@@ -147,3 +152,66 @@ html,body {
 	</div>
 </body>
 </html>
+<script>
+	$(function() {
+		function tudiFn() {
+			this.host = window.location.href;
+			this.hostname = "http://182.92.82.188:8084";
+			// this.hostname = "http://callback.ytoutiao.net";
+		}
+		tudiFn.prototype = {
+			getQueryString:function(name) {
+			    var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+			    var r = window.location.search.substr(1).match(reg);
+			    if (r != null) {
+			        return unescape(r[2]);
+			    }
+			    return null;
+			},
+			init:function() {
+				var that = this;
+
+				// that.phoneNum = "awaken";
+				// that.token = "e537025e-ef9c-4837-a4b0-89a6b690cf33";
+				// that.Code = "10018258";
+
+				that.phoneNum = that.getQueryString('uid');
+				that.token = that.getQueryString('token');
+				that.Code = that.getQueryString('studentInviteCode');
+				$.get(that.hostname+"/yfax-htt-api/api/htt/queryAwakeStudentState",{"phoneNum": that.phoneNum,"access_token": that.token, "studentInviteCode": that.Code},function(res) {
+					console.log(res);
+					// res.data = 1;
+					if(res.data == 0 || res.data == null) {
+						// 未领取资格
+						$(".money_bg2,.money_font2,.font_pic,.money_btn2").css("display","block");
+					}else if(res.data == 1) {
+						// 可领取
+						$(".new_root,.red_open,.new_font").css("display","block");
+					}else if(res.data == 2) {
+						// 重复领取
+						$(".money_bg3,.money_font3,.money_font4,.money_btn3").css("display","block");
+					}
+				});
+			},
+			openFn:function() {
+				var that = this;
+				$(".red_open").click(function() {
+					$.post(that.hostname+"/yfax-htt-api/api/htt/doStudentRebackAward",{"phoneNum": that.phoneNum,"access_token": that.token, "studentInviteCode": that.Code},function(res) {
+						console.log(res);
+						if(res.code == 200) {
+							$(".new_root,.red_open,.new_font").css("display","none");
+							$(".money_bg1,.money_font1,.gold,.money_btn1").css("display","block");
+							$(".gold span").text(res.data);
+							// $(".new_root,.red_open,.new_font").css("display","block");
+						}
+					});
+				});
+			},
+			start:function() {
+				this.init();
+				this.openFn();
+			}
+		}
+		var Go = new tudiFn().start();
+	});
+</script>
