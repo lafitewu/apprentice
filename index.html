@@ -177,7 +177,7 @@ html,body {
 
 				that.phoneNum = that.getQueryString('uid');
 				that.token = that.getQueryString('token');
-				that.Code = that.getQueryString('inviteCode');
+				that.Code = that.getQueryString('studentInviteCode');
 				$.get(that.hostname+"/yfax-htt-api/api/htt/queryAwakeStudentState",{"phoneNum": that.phoneNum,"access_token": that.token, "studentInviteCode": that.Code},function(res) {
 					console.log(res);
 					// res.data = 1;
