@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>test</title>
+	<script src="js/jquery-3.1.1.min.js"></script>
+	 <script src="http://yun.poppyta.com/h5-mami/msdk/tmk.js"></script>
+    <script>
+	(function(){
+      var o = document.getElementsByTagName("script");
+      var c = o[o.length-1].parentNode;
+      var ta = document.createElement('script'); ta.type = 'text/javascript'; ta.async = true;
+      ta.src = '//yun.lvehaisen.com/h5-mami/msdk/tmk.js';
+      ta.onload = function() {
+        new TuiSDK({
+          container: "#red_btn",
+          appKey: '2FeUYuki19ygFVQmQMUvpGYUyu9v',
+          slotId: '197490'
+        });
+      }
+      var s = document.querySelector('head'); s.appendChild(ta);
+    })();
+</script>
+</head>
+<style>
+	#red_btn {
+		width: 50px;
+		height: 50px;
+		background: red;
+	}
+</style>
+<body>
+	<div id="red_btn"></div>
+</body>
+</html>
